@@ -1,29 +1,17 @@
-what_were_covering = {1: "data (prepare and load)",
-    2: "build model",
-    3: "fitting the model to data (training)",
-    4: "making predictions and evaluating a model (inference)",
-    5: "saving and loading a model",
-    6: "putting it all together"
-}
-
 import torch
 from torch import nn # nn contains all of PyTorch's building blocks for neural networks
 import matplotlib.pyplot as plt
 
-torch.__version__
-
-
 # Create *known* parameters
-weight = 0.5
-bias = 0.3
+weight = 0.8
+bias = 0.2
 
 # Create data
 start = 0
 end = 1
-step = 0.02
+step = 0.01
 X = torch.arange(start, end, step).unsqueeze(dim=1)
 y = weight * X + bias
-
 
 #print(X[:10], y[:10])
 
@@ -79,7 +67,7 @@ class LinearRegressionModel(nn.Module): # <- almost everything in PyTorch is a n
 
 
 # Set manual seed since nn.Parameter are randomly initialzied
-torch.manual_seed(43)
+torch.manual_seed(12)
 
 # Create an instance of the model (this is a subclass of nn.Module that contains nn.Parameter(s))
 model_0 = LinearRegressionModel()
@@ -109,7 +97,9 @@ optimizer = torch.optim.SGD(params=model_0.parameters(), # parameters of target 
 torch.manual_seed(42)
 
 # Set the number of epochs (how many times the model will pass over the training data)
-epochs = 500
+epochs = 800
+
+# NB - the more training data, the fewer epochs to find a fit
 
 # Create empty loss lists to track values
 train_loss_values = []
